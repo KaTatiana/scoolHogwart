@@ -1,4 +1,4 @@
-package ru.hogwarts.scoolHogwart;
+package ru.hogwarts;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
