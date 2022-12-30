@@ -2,15 +2,7 @@ package ru.hogwarts.scoolHogwart.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.scoolHogwart.model.Student;
 import ru.hogwarts.scoolHogwart.service.StudentService;
 
@@ -36,7 +28,10 @@ public class StudentController {
     }
 
     @GetMapping
-    public ResponseEntity<Collection<Student>> getAllStudents() {
+    public ResponseEntity<Collection<Student>> getAllStudents(@RequestParam int min, @RequestParam int max) {
+        if(min!=-1&&max!=-1){
+            return ResponseEntity.ok(studentService.findByAgeBetween(min,max));
+        }
         return ResponseEntity.ok(studentService.getAllStudents());
     }
 
@@ -46,8 +41,8 @@ public class StudentController {
     }
 
     @PutMapping
-    public ResponseEntity<Student> editStudent(@RequestBody Student student) {
-        Student foundStudent = studentService.editStudent(student);
+    public ResponseEntity<Student> editStudent(@PathVariable long id, @RequestBody Student student) {
+        Student foundStudent = studentService.editStudent(id, student);
         if (foundStudent == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }

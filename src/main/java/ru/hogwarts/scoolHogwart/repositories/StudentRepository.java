@@ -4,4 +4,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import ru.hogwarts.scoolHogwart.model.Student;
 
 public interface StudentRepository extends JpaRepository<Student, Long> {
+    Student findByAgeBetween(int min, int max);
 }

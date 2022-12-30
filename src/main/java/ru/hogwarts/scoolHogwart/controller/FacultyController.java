@@ -2,14 +2,7 @@ package ru.hogwarts.scoolHogwart.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import ru.hogwarts.scoolHogwart.model.Faculty;
 import ru.hogwarts.scoolHogwart.service.FacultyService;
@@ -24,8 +17,14 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
     @GetMapping("{id}")
-    public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id) {
+    public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id, @RequestParam String name, @RequestParam String color) {
         Faculty faculty = facultyService.findFaculty(id);
+        if(name != null && !name.isBlank()){
+            return ResponseEntity.ok(facultyService.findByFacultyName(name));
+        }
+        if(color != null && !color.isBlank()){
+            return ResponseEntity.ok(facultyService.findByFacultyName(color));
+        }
         if (faculty == null) {
             return ResponseEntity.notFound().build();
         }
@@ -40,8 +39,8 @@ public class FacultyController {
     }
 
     @PutMapping
-    public ResponseEntity<Faculty> editFaculty(@RequestBody Faculty faculty) {
-        Faculty foundFaculty = facultyService.editFaculty(faculty);
+    public ResponseEntity<Faculty> editFaculty(@PathVariable long id, @RequestBody Faculty faculty) {
+        Faculty foundFaculty = facultyService.editFaculty(id, faculty);
         if (foundFaculty == null) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
         }
@@ -53,4 +52,7 @@ public class FacultyController {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }
+   // public Collection<Faculty>findByColor(@RequestParam String color){
+       // return facultyService.findByFacultyColor(color);
+   // }
 }

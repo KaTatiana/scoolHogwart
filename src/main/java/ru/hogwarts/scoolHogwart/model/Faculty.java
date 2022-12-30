@@ -3,10 +3,12 @@ package ru.hogwarts.scoolHogwart.model;
 import jakarta.persistence.Id;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.Table;
 
 import java.util.Objects;
 
 @Entity
+@Table(name = "faculties")
 public class Faculty {
     @Id
     @GeneratedValue
@@ -54,5 +56,12 @@ public class Faculty {
     public void setId(Long id) {
         this.id = id;
     }
+
+    public String getName(){return name;}
+    public void setName(String name){this.name = name;}
+
+    public String getColor(){return color;}
+    public void setColor(String color){this.color = color;}
+
 
 }
