@@ -54,4 +54,12 @@ public class StudentController {
         studentService.deleteStudent(id);
         return ResponseEntity.ok().build();
     }
+    @GetMapping(params = "age")
+    public Collection<Student> findByAge(@RequestParam int age){
+        return studentService.findByAge(age);
+    }
+    @GetMapping(params = "minAge, maxAge")
+    public Collection<Student> findByAgeBetween(@RequestParam int minAge, @RequestParam int maxAge){
+        return studentService.findByAgeBetween(minAge, maxAge);
+    }
 }

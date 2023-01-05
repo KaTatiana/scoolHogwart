@@ -10,10 +10,11 @@ public class Student {
     @Id
     @GeneratedValue
     private Long id;
-   // @OneToMany
-    //@JoinColumn(mappedBy = "position_id")
     private String name;
     private int age;
+
+    @ManyToOne
+    private Faculty faculty;
 
     public Student() {
     }

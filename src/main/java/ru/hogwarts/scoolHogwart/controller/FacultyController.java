@@ -19,19 +19,14 @@ public class FacultyController {
     @GetMapping("{id}")
     public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id, @RequestParam String name, @RequestParam String color) {
         Faculty faculty = facultyService.findFaculty(id);
-        if(name != null && !name.isBlank()){
-            return ResponseEntity.ok(facultyService.findByFacultyName(name));
-        }
-        if(color != null && !color.isBlank()){
-            return ResponseEntity.ok(facultyService.findByFacultyName(color));
-        }
+
         if (faculty == null) {
             return ResponseEntity.notFound().build();
         }
         return ResponseEntity.ok(faculty);
     }
-    @GetMapping
-    public ResponseEntity<Collection<Faculty>> getAllFaculties() {return ResponseEntity.ok(facultyService.getAllFaculties());}
+  //  @GetMapping
+  //  public ResponseEntity<Collection<Faculty>> getAllFaculties() {return ResponseEntity.ok(facultyService.getAllFaculties());}
 
     @PostMapping
     public Faculty createFaculty(@RequestBody Faculty faculty) {
@@ -52,7 +47,12 @@ public class FacultyController {
         facultyService.deleteFaculty(id);
         return ResponseEntity.ok().build();
     }
-   // public Collection<Faculty>findByColor(@RequestParam String color){
-       // return facultyService.findByFacultyColor(color);
-   // }
+    @GetMapping
+    public Collection<Faculty>findByColor(@RequestParam String color){
+        return facultyService.findByColor(color);
+    }
+    @GetMapping(params = "colorOrName")
+    public Collection<Faculty>findByColorOrName(@RequestParam String colorOrName){
+        return facultyService.findByColorOrName(colorOrName);
+    }
 }

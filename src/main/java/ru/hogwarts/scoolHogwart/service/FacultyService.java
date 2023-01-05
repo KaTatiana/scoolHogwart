@@ -40,15 +40,12 @@ public class FacultyService {
         return facultyRepository.findAll();
     }
 
-
-    public Faculty findByFacultyName(String name){
-
-        return facultyRepository.findByFacultyName(name);
+    public Collection<Faculty> findByColor(String color) {
+        return facultyRepository.findByColor(color);
     }
 
-    public Faculty findByFacultyColor(String color){
-
-        return facultyRepository.findByFacultyColor(color);
+    public Collection<Faculty> findByColorOrName(String colorOrName) {
+        return facultyRepository.findAllByColorIgnoreCaseOrNameIgnoreCase(colorOrName, colorOrName);
     }
 }
 
