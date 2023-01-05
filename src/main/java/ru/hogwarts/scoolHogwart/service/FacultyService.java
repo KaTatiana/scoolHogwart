@@ -10,7 +10,6 @@ import java.util.Collection;
 @Service
 public class FacultyService {
    private final FacultyRepository facultyRepository;
-   private long idGenerator = 1;
 
     public FacultyService(FacultyRepository facultyRepository){
         this.facultyRepository = facultyRepository;
@@ -21,9 +20,6 @@ public class FacultyService {
         return facultyRepository.save(faculty);
     }
 
-    public Faculty findFaculty(long id) {
-        return facultyRepository.findById(id).orElseThrow(() -> new FacultyNotFoundException(id));
-    }
 
     public Faculty editFaculty(long id, Faculty faculty) {
         if(facultyRepository.findById(id)==null){

@@ -16,17 +16,6 @@ public class FacultyController {
     public FacultyController(FacultyService facultyService) {
         this.facultyService = facultyService;
     }
-    @GetMapping("{id}")
-    public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id, @RequestParam String name, @RequestParam String color) {
-        Faculty faculty = facultyService.findFaculty(id);
-
-        if (faculty == null) {
-            return ResponseEntity.notFound().build();
-        }
-        return ResponseEntity.ok(faculty);
-    }
-  //  @GetMapping
-  //  public ResponseEntity<Collection<Faculty>> getAllFaculties() {return ResponseEntity.ok(facultyService.getAllFaculties());}
 
     @PostMapping
     public Faculty createFaculty(@RequestBody Faculty faculty) {
