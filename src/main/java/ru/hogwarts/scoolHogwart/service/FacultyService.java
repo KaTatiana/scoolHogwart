@@ -35,7 +35,7 @@ public class FacultyService {
 
         return facultyRepository.findAll();
     }
-
+    //метод,для поиска по цвету
     public Collection<Faculty> findByColor(String color) {
         return facultyRepository.findByColor(color);
     }

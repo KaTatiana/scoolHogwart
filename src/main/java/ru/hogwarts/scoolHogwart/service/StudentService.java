@@ -41,6 +41,7 @@ public class StudentService {
         return studentRepository.findAll();
     }
 
+    // метод для поиска по возрасту
     public Collection<Student> findByAge(int age){
         return studentRepository.findByAge(age);
     }
