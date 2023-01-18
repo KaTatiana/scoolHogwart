@@ -49,4 +49,12 @@ public class StudentService {
     public Collection<Student> findByAgeBetween(int min, int max){
         return studentRepository.findByAgeBetween(min, max);
     }
+
+    public Student findByName(String name) {
+        return studentRepository.findByName(name);
+    }
+
+    public Collection<Student> findByFaculty(String faculty) {
+        return studentRepository.findByFaculty(faculty);
+    }
 }

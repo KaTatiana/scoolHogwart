@@ -9,12 +9,12 @@ public class ExceptionHandler {
     @org.springframework.web.bind.annotation.ExceptionHandler(StudentNotFoundException.class)
     public ResponseEntity<String> handStudentNotFoundException(StudentNotFoundException e){
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(String.format("Студент с ip = %d не найден!", e.getId()));
+                .body(String.format("Студент с id = %d не найден!", e.getId()));
     }
 
     @org.springframework.web.bind.annotation.ExceptionHandler(FacultyNotFoundException.class)
     public ResponseEntity<String> handFacultyNotFoundException(FacultyNotFoundException e){
         return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                .body(String.format("Факультет с ip = %d не найден!", e.getId()));
+                .body(String.format("Факультет с id = %d не найден!", e.getId()));
     }
 }
