@@ -6,20 +6,17 @@ import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.scoolHogwart.model.Faculty;
 import ru.hogwarts.scoolHogwart.model.Student;
 import ru.hogwarts.scoolHogwart.service.FacultyService;
-import ru.hogwarts.scoolHogwart.service.StudentService;
 
 import java.util.Collection;
 
 @RestController
 @RequestMapping("/faculty")
 public class FacultyController {
-    private final FacultyService facultyService;
-    public FacultyController(FacultyService facultyService, StudentService studentService) {
-        this.facultyService = facultyService;
-        this.studentService = studentService;
-    }
 
-    private final StudentService studentService;
+    private final FacultyService facultyService;
+    public FacultyController(FacultyService facultyService) {
+        this.facultyService = facultyService;
+    }
 
     @PostMapping
     public Faculty createFaculty(@RequestBody Faculty faculty) {
@@ -49,8 +46,8 @@ public class FacultyController {
     public Collection<Faculty>findByColorOrName(@RequestParam String colorOrName){
         return facultyService.findByColorOrName(colorOrName);
     }
-    @GetMapping(params = "faculty")
-    public Collection<Student> findByFaculty(@RequestParam String faculty){
-        return studentService.findByFaculty(faculty);
+    @GetMapping("/{id}/students")
+    public Collection<Student> findByFaculty(@PathVariable long id){
+        return facultyService.findByFaculty(id);
     }
 }

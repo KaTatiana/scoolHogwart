@@ -8,21 +8,23 @@ import java.util.Objects;
 @Table(name = "students")
 public class Student {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private int age;
 
     @ManyToOne
+   // @JoinColumn(name="faculty_id")
     private Faculty faculty;
 
     public Student() {
     }
 
-    public Student(Long id, String name, int age) {
+    public Student(Long id, String name, int age, Faculty faculty) {
         this.id = id;
         this.name = name;
         this.age = age;
+        this.faculty = faculty;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class Student {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, age);
+        return Objects.hash(id, name, age, faculty);
     }
 
     @Override
@@ -46,6 +48,7 @@ public class Student {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", age=" + age +
+                ", faculty" + faculty.getName() +
                 '}';
     }
 
@@ -58,4 +61,9 @@ public class Student {
     public int getAge(){return age;}
     public void setAge(int Age){this.age = age;}
 
+    public Faculty getFaculty(){return faculty;}
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
 }
