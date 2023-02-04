@@ -51,7 +51,6 @@ public class AvatarService {
         return Pair.of(avatar.getMediaType(), avatar.getData());
     }
 
-
     public Object readAvatarFromFs(long id) throws IOException{
         Avatar avatar = avatarRepository.findById(id).orElseThrow(() -> new AvatarNotFoundException(id));
         return Pair.of(avatar.getMediaType(), Files.readAllBytes(Paths.get(avatar.getFilePath())));
