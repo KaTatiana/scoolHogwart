@@ -27,6 +27,9 @@ public class Student {
         this.faculty = faculty;
     }
 
+    public Student(long id, String name, int age) {
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o)
