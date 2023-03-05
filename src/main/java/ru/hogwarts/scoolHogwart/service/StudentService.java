@@ -4,6 +4,7 @@ import org.springframework.stereotype.Service;
 import ru.hogwarts.scoolHogwart.exception.StudentNotFoundException;
 import ru.hogwarts.scoolHogwart.model.Faculty;
 import ru.hogwarts.scoolHogwart.model.Student;
+import ru.hogwarts.scoolHogwart.model.StudentByEndStudents;
 import ru.hogwarts.scoolHogwart.repositories.StudentRepository;
 
 import java.util.Collection;
@@ -54,5 +55,13 @@ public class StudentService {
     public Faculty findByName(long id) {
         return studentRepository.findByFaculty_Id(id);
     }
-
+    public Integer studentByQuantity() {
+        return studentRepository.studentByQuantity();
+    }
+    public Integer studentByAverageAge() {
+        return studentRepository.studentByAverageAge();
+    }
+    public Collection<StudentByEndStudents> getStudentByEndStudents() {
+        return studentRepository.getStudentByEndStudents();
+    }
 }
